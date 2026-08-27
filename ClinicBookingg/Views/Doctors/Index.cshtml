@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ClinicBookingg.Models.Doctor>
+
+@{
+    ViewData["Title"] = "Doctors Directory";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Doctors Directory</h2>
+        <a asp-action="Create" class="btn btn-primary">Add New Doctor</a>
+    </div>
+
+    @if (TempData["FlashMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["FlashMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="row">
+        @if (!Model.Any())
+        {
+            <div class="col-12 text-center py-5">
+                <div class="alert alert-warning shadow-sm">
+                    <h4>No doctors registered yet</h4>
+                    <p class="mb-0">Click the button above to add the first doctor to the database.</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            @foreach (var doctor in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <!-- Q12: Display Doctor Photo or Placeholder -->
+                        @if (!string.IsNullOrEmpty(doctor.ImageUrl))
+                        {
+                            <img src="~/images/doctors/@doctor.ImageUrl" class="card-img-top" alt="@doctor.Name" style="height: 220px; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <div class="bg-light text-center py-4 text-muted border-bottom">
+                                <i class="bi bi-person-circle display-4"></i>
+                                <p class="mb-0 small">No Photo Available</p>
+                            </div>
+                        }
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@doctor.Name</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@doctor.Specialty</h6>
+                            <p class="card-text mb-1"><strong>Licence:</strong> @doctor.LicenceNumber</p>
+                            <p class="card-text mb-1"><strong>Phone:</strong> @doctor.Phone</p>
+                            <p class="card-text mb-2"><strong>Experience:</strong> @doctor.YearsOfExperience years</p>
+                            <p class="card-text text-truncate">@doctor.Bio</p>
+
+                            <div class="mt-auto d-flex justify-content-between pt-2 border-top">
+                                <a asp-action="Edit" asp-route-id="@doctor.Id" class="btn btn-outline-warning btn-sm">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@doctor.Id" class="btn btn-outline-danger btn-sm">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ClinicBooking</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                
+                <!-- اليسار: اسم التطبيق والروابط -->
+                <div class="d-flex align-items-center">
+                    <a class="navbar-brand me-4" asp-controller="Doctors" asp-action="Index">ClinicBooking</a>
+                    <ul class="navbar-nav d-flex flex-row gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Doctors" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Doctors" asp-action="Index">Our Doctors</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- اليمين: زر الدخول والتسجيل أو الخروج -->
+                <div>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="fw-bold text-primary">
+                                Hello, @User.Identity.Name (@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value)
+                            </span>
+                            <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex gap-2">
+                            <a class="btn btn-outline-primary btn-sm" asp-controller="Account" asp-action="Login">Login</a>
+                            <a class="btn btn-primary btn-sm text-white" asp-controller="Account" asp-action="Register">Register</a>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - ClinicBooking - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

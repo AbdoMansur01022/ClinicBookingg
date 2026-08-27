@@ -1,0 +1,23 @@
+﻿@model ClinicBookingg.Models.Doctor
+
+@{
+    ViewData["Title"] = "Doctor Details";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3>@Model.Name Profile</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-muted">Specialty: @Model.Specialty</h5>
+            <p class="card-text mt-3"><strong>Years of Experience:</strong> @Model.YearsOfExperience years</p>
+            <p class="card-text"><strong>Biography:</strong> @Model.Bio</p>
+
+            <div class="mt-4">
+                <a asp-action="Book" asp-route-id="@Model.Id" class="btn btn-success">Book Appointment</a>
+                <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

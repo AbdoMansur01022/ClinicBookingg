@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var specialties = new[] { "Cardiology", "Dermatology", "Pediatrics", "Orthopedics", "Dentistry", "Neurology" };
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to ClinicBooking</h1>
+    <h3 class="mt-4">Our Specialties:</h3>
+    <ul class="list-group w-50 mx-auto">
+        @foreach (var item in specialties)
+        {
+            <li class="list-group-item">@item</li>
+        }
+    </ul>
+</div>

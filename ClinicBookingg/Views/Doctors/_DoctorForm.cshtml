@@ -1,0 +1,59 @@
+﻿@model ClinicBookingg.Models.Doctor
+
+@* Q3: Validation Summary for Model-Level Errors *@
+<div asp-validation-summary="ModelOnly" class="text-danger fw-bold mb-3"></div>
+
+@* Q7: Licence Number Field *@
+<div class="mb-3">
+    <label asp-for="LicenceNumber" class="form-label"></label>
+    <input asp-for="LicenceNumber" class="form-control" placeholder="e.g. LIC-1001" />
+    <span asp-validation-for="LicenceNumber" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Phone" class="form-label"></label>
+    <input asp-for="Phone" class="form-control" placeholder="01012345678" />
+    <span asp-validation-for="Phone" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Specialty" class="form-label"></label>
+    <select asp-for="Specialty" asp-items="ViewBag.Specialties" class="form-select">
+        <option value="">-- Select Specialty --</option>
+    </select>
+    <span asp-validation-for="Specialty" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="YearsOfExperience" class="form-label"></label>
+    <input asp-for="YearsOfExperience" class="form-control" type="number" />
+    <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Bio" class="form-label"></label>
+    <textarea asp-for="Bio" class="form-control" rows="3"></textarea>
+    <span asp-validation-for="Bio" class="text-danger"></span>
+</div>
+
+@* Q12: Doctor Photo Upload & Existing Image Preview *@
+<div class="mb-3">
+    <label class="form-label">Profile Photo</label>
+
+    @if (!string.IsNullOrEmpty(Model?.ImageUrl))
+    {
+        <div class="mb-2">
+            <img src="~/images/doctors/@Model.ImageUrl" alt="Doctor Photo" class="img-thumbnail" style="max-height: 120px;" />
+            <p class="text-muted small mb-0">Current Photo</p>
+        </div>
+    }
+
+    <input type="file" name="imageFile" class="form-control" accept="image/*" />
+    <span class="text-muted small">Allowed formats: JPG, PNG, WEBP.</span>
+</div>

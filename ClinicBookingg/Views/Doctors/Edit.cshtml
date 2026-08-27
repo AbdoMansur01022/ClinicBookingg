@@ -1,0 +1,27 @@
+﻿@model ClinicBookingg.Models.Doctor
+
+@{
+    ViewData["Title"] = "Edit Doctor";
+}
+
+<div class="container mt-4">
+    <h2>Edit Doctor - @Model.Name</h2>
+    <hr />
+
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+        @await Html.PartialAsync("_DoctorForm", Model)
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-warning">Update Doctor</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<!-- Q11: Render validation scripts ONLY on form pages -->
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+}
